@@ -11276,6 +11276,10 @@ void hlsl::HandleDeclAttributeForHLSL(Sema &S, Decl *D, const AttributeList &A, 
     declAttr = ::new (S.Context) HLSLMaxVertexCountAttr(A.getRange(), S.Context,
       ValidateAttributeIntArg(S, A), A.getAttributeSpellingListIndex());
     break;
+  case AttributeList::AT_HLSLIntelBlockRead:
+    declAttr = ::new (S.Context) HLSLIntelBlockReadAttr(A.getRange(), S.Context,
+      ValidateAttributeIntArg(S, A), A.getAttributeSpellingListIndex());
+    break;
   case AttributeList::AT_HLSLExperimental:
     declAttr = ::new (S.Context) HLSLExperimentalAttr(A.getRange(), S.Context,
       ValidateAttributeStringArg(S, A, nullptr, 0), ValidateAttributeStringArg(S, A, nullptr, 1),

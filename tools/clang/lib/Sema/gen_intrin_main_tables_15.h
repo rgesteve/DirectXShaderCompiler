@@ -1498,6 +1498,18 @@ static const HLSL_INTRINSIC_ARGUMENT g_Intrinsics_Args221[] =
     {"x", AR_QUAL_IN, 1, LITEMPLATE_ANY, 1, LICOMPTYPE_FLOAT_LIKE, IA_R, IA_C},
 };
 
+static const HLSL_INTRINSIC_ARGUMENT g_Intrinsics_Args222[] =
+{
+    {"intel_sub_group_block_read4", AR_QUAL_OUT, 1, LITEMPLATE_ANY, 1, LICOMPTYPE_NUMERIC, IA_R, IA_C},
+    {"x", AR_QUAL_IN, 1, LITEMPLATE_ANY, 1, LICOMPTYPE_NUMERIC, IA_R, IA_C},
+};
+
+static const HLSL_INTRINSIC_ARGUMENT g_Intrinsics_Args223[] =
+{
+    {"intel_sub_group_block_write4", AR_QUAL_OUT, 1, LITEMPLATE_ANY, 1, LICOMPTYPE_NUMERIC, IA_R, IA_C},
+    {"x", AR_QUAL_IN, 1, LITEMPLATE_ANY, 1, LICOMPTYPE_NUMERIC, IA_R, IA_C},
+};
+
 static const HLSL_INTRINSIC g_Intrinsics[] =
 {
     {(UINT)hlsl::IntrinsicOp::IOP_AcceptHitAndEndSearch, false, false, false, -1, 1, g_Intrinsics_Args0},
@@ -1722,6 +1734,9 @@ static const HLSL_INTRINSIC g_Intrinsics[] =
     {(UINT)hlsl::IntrinsicOp::IOP_texCUBEproj, true, false, false, -1, 3, g_Intrinsics_Args219},
     {(UINT)hlsl::IntrinsicOp::IOP_transpose, false, true, false, -1, 2, g_Intrinsics_Args220},
     {(UINT)hlsl::IntrinsicOp::IOP_trunc, false, true, false, -1, 2, g_Intrinsics_Args221},
+    // 
+    {(UINT)hlsl::IntrinsicOp::IOP_intel_sub_group_block_read4, false, true, false, -1, 2, g_Intrinsics_Args222},
+    {(UINT)hlsl::IntrinsicOp::IOP_intel_sub_group_block_write4, false, true, false, -1, 2, g_Intrinsics_Args223},
 };
 
 //

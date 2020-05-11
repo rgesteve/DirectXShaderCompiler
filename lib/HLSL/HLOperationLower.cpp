@@ -1318,6 +1318,46 @@ Value *TranslateAbs(CallInst *CI, IntrinsicOp IOP, OP::OpCode opcode,
   }
 }
 
+Value *TranslateIntelBlockRead(CallInst *CI, IntrinsicOp IOP, OP::OpCode opcode,
+                    HLOperationLowerHelper &helper,  HLObjectOperationLowerHelper *pObjHelper, bool &Translated) {
+  hlsl::OP *hlslOP = &helper.hlslOP;
+  Type *pOverloadTy = CI->getType()->getScalarType();
+  /*
+  if (pOverloadTy->isFloatingPointTy()) {
+    Value *refArgs[] = {nullptr, CI->getOperand(1)};
+    return TrivialDxilOperation(DXIL::OpCode::FAbs, refArgs, CI->getType(), CI,
+                                hlslOP);
+  } else {
+    Value *src = CI->getArgOperand(HLOperandIndex::kUnaryOpSrc0Idx);
+    IRBuilder<> Builder(CI);
+    Value *neg = Builder.CreateNeg(src);
+    return TrivialDxilBinaryOperation(DXIL::OpCode::IMax, src, neg, hlslOP,
+                                      Builder);
+  } */
+  Value *refArgs[] = {nullptr, CI->getOperand(1)};
+  return TrivialDxilOperation(DXIL::OpCode::FAbs, refArgs, CI->getType(), CI, hlslOP);
+}
+
+Value *TranslateIntelBlockWrite(CallInst *CI, IntrinsicOp IOP, OP::OpCode opcode,
+                    HLOperationLowerHelper &helper,  HLObjectOperationLowerHelper *pObjHelper, bool &Translated) {
+  hlsl::OP *hlslOP = &helper.hlslOP;
+  Type *pOverloadTy = CI->getType()->getScalarType();
+  /*
+  if (pOverloadTy->isFloatingPointTy()) {
+    Value *refArgs[] = {nullptr, CI->getOperand(1)};
+    return TrivialDxilOperation(DXIL::OpCode::FAbs, refArgs, CI->getType(), CI,
+                                hlslOP);
+  } else {
+    Value *src = CI->getArgOperand(HLOperandIndex::kUnaryOpSrc0Idx);
+    IRBuilder<> Builder(CI);
+    Value *neg = Builder.CreateNeg(src);
+    return TrivialDxilBinaryOperation(DXIL::OpCode::IMax, src, neg, hlslOP,
+                                      Builder);
+  } */
+  Value *refArgs[] = {nullptr, CI->getOperand(1)};
+  return TrivialDxilOperation(DXIL::OpCode::FAbs, refArgs, CI->getType(), CI, hlslOP);
+}
+
 Value *TranslateUAbs(CallInst *CI, IntrinsicOp IOP, OP::OpCode opcode,
   HLOperationLowerHelper &helper, HLObjectOperationLowerHelper *pObjHelper, bool &Translated) {
   return CI->getOperand(HLOperandIndex::kUnaryOpSrc0Idx); // No-op
@@ -5261,6 +5301,8 @@ IntrinsicLower gLowerTable[] = {
     {IntrinsicOp::IOP_frac, TrivialUnaryOperation, DXIL::OpCode::Frc},
     {IntrinsicOp::IOP_frexp, TranslateFrexp, DXIL::OpCode::NumOpCodes},
     {IntrinsicOp::IOP_fwidth, TranslateFWidth, DXIL::OpCode::NumOpCodes},
+    {IntrinsicOp::IOP_intel_sub_group_block_read4, TranslateIntelBlockRead, DXIL::OpCode::NumOpCodes},
+    {IntrinsicOp::IOP_intel_sub_group_block_write4, TranslateIntelBlockWrite, DXIL::OpCode::NumOpCodes},
     {IntrinsicOp::IOP_isfinite, TrivialIsSpecialFloat, DXIL::OpCode::IsFinite},
     {IntrinsicOp::IOP_isinf, TrivialIsSpecialFloat, DXIL::OpCode::IsInf},
     {IntrinsicOp::IOP_isnan, TrivialIsSpecialFloat, DXIL::OpCode::IsNaN},

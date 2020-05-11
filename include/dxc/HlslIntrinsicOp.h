@@ -165,6 +165,8 @@ import hctdb_instrhelp
   IOP_frac,
   IOP_frexp,
   IOP_fwidth,
+  IOP_intel_sub_group_block_read4,
+  IOP_intel_sub_group_block_write4,
   IOP_isfinite,
   IOP_isinf,
   IOP_isnan,

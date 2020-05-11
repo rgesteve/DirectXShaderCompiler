@@ -865,6 +865,14 @@ def HLSLExperimental : InheritableAttr {
   let Documentation = [Undocumented];
 }
 
+// Add Intel-specific block-read attribute to function (takes one int argument)
+def HLSLIntelBlockRead : InheritableAttr {
+  let Spellings = [CXX11<"", "intel_reqd_sub_group_size", 2017>];
+  let Args = [IntArgument<"BlockSize">];
+  let Subjects = SubjectList<[Function], ErrorDiag, "ExpectedFunction">;
+  let Documentation = [Undocumented];
+}
+
 def HLSLExport : InheritableAttr {
   let Spellings = [CXX11<"", "export", 2015>];
   let Subjects = SubjectList<[Function], ErrorDiag, "ExpectedFunction">;

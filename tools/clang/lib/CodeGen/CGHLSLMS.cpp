@@ -2156,6 +2156,11 @@ void CGMSHLSLRuntime::AddHLSLFunctionInfo(Function *F, const FunctionDecl *FD) {
   for (const auto &Attr : FD->specific_attrs<HLSLExperimentalAttr>()) {
     F->addFnAttr(Twine("exp-", Attr->getName()).str(), Attr->getValue());
   }
+
+  for (const auto &Attr : FD->specific_attrs<HLSLIntelBlockReadAttr>()) {
+//    F->addFnAttr("intelblock", Attr->getBlockSize());
+    F->addFnAttr("intelblock", "16");
+  }
 }
 
 void CGMSHLSLRuntime::RemapObsoleteSemantic(DxilParameterAnnotation &paramInfo, bool isPatchConstantFunction) {
